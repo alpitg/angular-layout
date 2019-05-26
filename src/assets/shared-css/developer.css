@@ -1,0 +1,39 @@
+.echart-line-chart {
+  height: 3em;
+  width: 8em;
+}
+.echart-line-chart-area {
+  height: 50px;
+}
+.fix-h-292 {
+  height: 292px !important;
+}
+.echart-doughnut {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.cwidget-scroll {
+  height: 260px;
+  overflow: auto;
+}
+
+.sidebar {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.sidebar::-webkit-scrollbar {
+  /* WebKit */
+  width: 0px;
+}
+.parsley-errors-list {
+  list-style-type: none;
+  line-height: 0.9em;
+  padding-left: 5px;
+}
+.form-control,
+.custom-file-input {
+  height: auto;
+}

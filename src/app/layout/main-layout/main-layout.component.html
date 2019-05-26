@@ -1,0 +1,27 @@
+<!-- Page Loader -->
+<div class="body {{ themeClass }} {{ smallScreenMenu }}">
+  <div id="wrapper">
+    <app-header
+      [showNotifMenu]="showNotifMenu"
+      [showToggleMenu]="showToggleMenu"
+      (toggleSettingDropMenuEvent)="toggleSettingDropMenu()"
+      (toggleNotificationDropMenuEvent)="toggleNotificationDropMenu()"
+    ></app-header>
+
+    <app-sidebar
+      [sidebarVisible]="sidebarService.sidebarVisible"
+      [navTab]="navTab"
+      [currentActiveMenu]="currentActiveMenu"
+      [currentActiveSubMenu]="currentActiveSubMenu"
+      (activeInactiveMenuEvent)="activeInactiveMenu($event)"
+    ></app-sidebar>
+
+    <div
+      id="main-content"
+      [ngClass]="{ 'layout-fullwidth': !sidebarService.sidebarVisible }"
+    >
+      <router-outlet (activate)="getActiveRoutes()"></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

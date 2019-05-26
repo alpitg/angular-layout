@@ -1,0 +1,355 @@
+
+
+<div id="left-sidebar" class="sidebar" *ngIf="sidebarVisible" style="overflow-y:scroll;">
+    <div class="sidebar-scroll">
+        <div class="user-account">
+            <img src="assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
+            <div class="dropdown" ngbDropdown>
+                <span>Welcome,</span>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" ngbDropdownToggle><strong>
+                    SynderFiltration</strong></a>
+                <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
+                    <li><a [routerLink]="['/admin/pages/page-profile2']"><i class="icon-user"></i>My Profile</a></li>
+                    <li><a [routerLink]="['/admin/app/app-inbox']"><i class="icon-envelope-open"></i>Messages</a></li>
+                    <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a [routerLink]="['/authentication/page-login']"><i class="icon-power"></i>Logout</a></li>
+                </ul>
+            </div>
+            <hr>
+            <span>Stats for the last days</span>
+            <ul class="row list-unstyled">
+                <li class="col-4">
+                    <small style="font-size:66%;">Cost</small>
+                    <h6 style="font-size:12px;">${{cost}}</h6>
+                </li>
+                <li class="col-4">
+                    <small style="font-size:66%;">Conversions</small>
+                    <h6 style="font-size:12px;">{{conversion}}</h6>
+                </li>
+                <li class="col-4">
+                    <small style="font-size:66%;">Cost/Conversion</small>
+                    <h6 style="font-size:12px;">${{costPerConversion}}</h6>
+                </li>
+            </ul>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link" [ngClass]="{'active':navTab == 'menu'}" (click)="changeNavTab('menu')">Menu</a></li>
+            <li class="nav-item"><a class="nav-link" [ngClass]="{'active':navTab == 'setting'}" (click)="changeNavTab('setting')"><i
+                        class="icon-settings"></i></a></li>
+            <li class="nav-item"><a class="nav-link" [ngClass]="{'active':navTab == 'question'}" (click)="changeNavTab('question')"><i
+                        class="icon-question"></i></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content p-l-0 p-r-0">
+            <div class="tab-pane" id="menu" [ngClass]="{'active':navTab == 'menu' || !navTab}">
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'dashboard'}">
+                            <a [routerLink]="['/dashboard']"><i class="icon-home"></i>
+                                <span>Dashboard</span></a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/admin/keywords/keyword-list']"><i class="fa fa-language"></i> <span>Keywords</span></a>
+                        </li>
+                        <li [ngClass]="{'active':currentActiveMenu == 'file-manager'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('file-manager')"><i class="icon-folder"></i>
+                                <span>Reports</span></a>
+                            <ul *ngIf="currentActiveMenu == 'file-manager'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/file-manager/file-documents']">Performance Reports</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/file-manager/file-media']">Activity</a></li>
+                                <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/file-manager/file-images']">Images</a></li> -->
+                            </ul>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/devices/device-listing']"><i class="icon-globe"></i> <span>Devices</span></a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'ui-elements'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('ui-elements')"><i class="icon-diamond"></i>
+                                <span>Location</span></a>
+                            <ul *ngIf="currentActiveMenu == 'ui-elements'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/typography']">Typography</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-tabs']">Tabs</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-buttons']">Buttons</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-bootstrap']">Bootstrap
+                                        UI</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-icons']">Icons</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-notifications']">Notifications</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-colors']">Colors</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-list-group']">List
+                                        Group</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-media-object']">Media
+                                        Object</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-modal']">Modals</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/ui-elements/ui-progressbars']">Progress
+                                        Bars</a></li>
+                            </ul>
+                        </li>
+
+                        <li [ngClass]="{'active':currentActiveMenu == 'widgets'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('widgets')"><i class="icon-puzzle"></i>
+                                <span>Time of day</span></a>
+                            <ul *ngIf="currentActiveMenu == 'widgets'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
+                                        [routerLink]="['/admin/widgets/widgets-data']">Data</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
+                                        [routerLink]="['/admin/widgets/widgets-weather']">Weather</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
+                                        [routerLink]="['/admin/widgets/widgets-blog']">Blog</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
+                                        [routerLink]="['/admin/widgets/widgets-ecommerce']">eCommerce</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- <li [ngClass]="{'active':currentActiveMenu == 'authentication'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('authentication')"><i class="icon-lock"></i>
+                                <span>Authentication</span></a>
+                            <ul *ngIf="currentActiveMenu == 'authentication'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-login']">Login</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-register']">Register</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-lockscreen']">Lockscreen</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-forgot-password']">Forgot Password</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-404']">Page 404</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-403']">Page 403</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-500']">Page 500</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-503']">Page 503</a></li>
+                            </ul>
+                        </li>
+                        <li [ngClass]="{'active':currentActiveMenu == 'pages'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('pages')"><i class="icon-docs"></i> <span>Pages</span></a>
+                            <ul *ngIf="currentActiveMenu == 'pages'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-blank']">Blank
+                                        Page</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-profile']">Profile
+                                        <span class="badge badge-default float-right">v1</span></a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-profile2']">Profile
+                                        <span class="badge badge-warning float-right">v2</span></a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-gallery']">Image
+                                        Gallery</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-timeline']">Timeline</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-pricing']">Pricing</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-invoices']">Invoices
+                                        <span class="badge badge-default float-right">v1</span></a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-invoices2']">Invoices
+                                        <span class="badge badge-warning float-right">v2</span></a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-search-results']">Search
+                                        Results</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-helper-class']">Helper
+                                        Classes</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-teams-board']">Teams
+                                        Board</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-projects-list']">Projects
+                                        List</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/authentication/page-maintanance']">Maintanance</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-testimonials']">Testimonials</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/pages/page-faq']">FAQ</a></li>
+                            </ul>
+                        </li>
+                        <li [ngClass]="{'active':currentActiveMenu == 'forms'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('forms')"><i class="icon-pencil"></i>
+                                <span>Forms</span></a>
+                            <ul *ngIf="currentActiveMenu == 'forms'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
+                                        [routerLink]="['/admin/forms/forms-validation']">Form Validation</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/forms/forms-basic']">Basic Elements</a></li>
+                            </ul>
+                        </li>
+                        <li [ngClass]="{'active':currentActiveMenu == 'tables'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('tables')"><i class="icon-tag"></i> <span>Tables</span></a>
+                            <ul *ngIf="currentActiveMenu == 'tables'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/tables/table-normal']">Normal
+                                        Tables</a></li>
+                            </ul>
+                        </li>
+                        <li [ngClass]="{'active':currentActiveMenu == 'charts'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('charts')"><i class="icon-bar-chart"></i>
+                                <span>Charts</span></a>
+                            <ul *ngIf="currentActiveMenu == 'charts'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/charts/chart-echarts']">E-Charts</a></li>
+                            </ul>
+                        </li> -->
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'app'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('app')"><i class="icon-grid"></i> <span>Household Income</span></a>
+                            <ul *ngIf="currentActiveMenu == 'app'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-inbox']">Inbox</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-chat']">Chat</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-calendar']">Calendar</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-contact-grid']">Contact
+                                        Card <span class="badge badge-warning float-right">New</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="tab-pane p-l-15 p-r-15" id="Chat" [ngClass]="{'active':navTab == 'chat'}">
+                <form>
+                    <div class="input-group m-b-20">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-magnifier"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+                </form>
+                <ul class="right_chat list-unstyled">
+                    <li class="online">
+                        <a href="javascript:void(0);">
+                            <div class="media">
+                                <img class="media-object " src="assets/images/xs/avatar4.jpg" alt="">
+                                <div class="media-body">
+                                    <span class="name">Chris Fox</span>
+                                    <span class="message">Designer, Blogger</span>
+                                    <span class="badge badge-outline status"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="online">
+                        <a href="javascript:void(0);">
+                            <div class="media">
+                                <img class="media-object " src="assets/images/xs/avatar5.jpg" alt="">
+                                <div class="media-body">
+                                    <span class="name">Joge Lucky</span>
+                                    <span class="message">Java Developer</span>
+                                    <span class="badge badge-outline status"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="offline">
+                        <a href="javascript:void(0);">
+                            <div class="media">
+                                <img class="media-object " src="assets/images/xs/avatar2.jpg" alt="">
+                                <div class="media-body">
+                                    <span class="name">Isabella</span>
+                                    <span class="message">CEO, Thememakker</span>
+                                    <span class="badge badge-outline status"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="offline">
+                        <a href="javascript:void(0);">
+                            <div class="media">
+                                <img class="media-object " src="assets/images/xs/avatar1.jpg" alt="">
+                                <div class="media-body">
+                                    <span class="name">Folisise Chosielie</span>
+                                    <span class="message">Art director, Movie Cut</span>
+                                    <span class="badge badge-outline status"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="online">
+                        <a href="javascript:void(0);">
+                            <div class="media">
+                                <img class="media-object " src="assets/images/xs/avatar3.jpg" alt="">
+                                <div class="media-body">
+                                    <span class="name">Alexander</span>
+                                    <span class="message">Writter, Mag Editor</span>
+                                    <span class="badge badge-outline status"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane p-l-15 p-r-15" id="setting" [ngClass]="{'active':navTab == 'setting'}">
+                <h6>Choose Skin</h6>
+                <ul class="choose-skin list-unstyled">
+                    <li data-theme="purple" [ngClass]="{'active':themeClass == 'theme-purple'}" (click)="changeTheme('theme-purple')">
+                        <div class="purple"></div>
+                        <span>Purple</span>
+                    </li>
+                    <li data-theme="blue" [ngClass]="{'active':themeClass == 'theme-blue'}" (click)="changeTheme('theme-blue')">
+                        <div class="blue"></div>
+                        <span>Blue</span>
+                    </li>
+                    <li data-theme="cyan" [ngClass]="{'active':themeClass == 'theme-cyan'}" (click)="changeTheme('theme-cyan')">
+                        <div class="cyan"></div>
+                        <span>Cyan</span>
+                    </li>
+                    <li data-theme="green" [ngClass]="{'active':themeClass == 'theme-green'}" (click)="changeTheme('theme-green')">
+                        <div class="green"></div>
+                        <span>Green</span>
+                    </li>
+                    <li data-theme="orange" [ngClass]="{'active':themeClass == 'theme-orange'}" (click)="changeTheme('theme-orange')">
+                        <div class="orange"></div>
+                        <span>Orange</span>
+                    </li>
+                    <li data-theme="blush" [ngClass]="{'active':themeClass == 'theme-blush'}" (click)="changeTheme('theme-blush')">
+                        <div class="blush"></div>
+                        <span>Blush</span>
+                    </li>
+                </ul>
+                <hr>
+                <h6>General Settings</h6>
+                <ul class="setting-list list-unstyled">
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox">
+                            <span>Report Panel Usag</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox" checked>
+                            <span>Email Redirect</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox" checked>
+                            <span>Notifications</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox">
+                            <span>Auto Updates</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox">
+                            <span>Offline</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="fancy-checkbox">
+                            <input type="checkbox" name="checkbox">
+                            <span>Location Permission</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane p-l-15 p-r-15" id="question" [ngClass]="{'active':navTab == 'question'}">
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-magnifier"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+                </form>
+                <ul class="list-unstyled question">
+                    <li class="menu-heading">HOW-TO</li>
+                    <li><a href="javascript:void(0);">How to Create Campaign</a></li>
+                    <li><a href="javascript:void(0);">Boost Your Sales</a></li>
+                    <li><a href="javascript:void(0);">Website Analytics</a></li>
+                    <li class="menu-heading">ACCOUNT</li>
+                    <li><a href="javascript:void(0);">Cearet New Account</a></li>
+                    <li><a href="javascript:void(0);">Change Password?</a></li>
+                    <li><a href="javascript:void(0);">Privacy &amp; Policy</a></li>
+                    <li class="menu-heading">BILLING</li>
+                    <li><a href="javascript:void(0);">Payment info</a></li>
+                    <li><a href="javascript:void(0);">Auto-Renewal</a></li>
+                    <li class="menu-button m-t-30">
+                        <a href="javascript:void(0);" class="btn btn-primary"><i class="icon-question"></i> Need Help?</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
